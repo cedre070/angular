@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>angular</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css" media="screen" title="no title">
+  </head>
+  <!--Initialisation de l'Application-->
+  <body ng-app="myApp">
+
+    <div ng-controller="myController">
+      <h3>{{ nom }} {{ prenom }}</h3>
+      <a ng-click='modifierPrenom()'>Modifies mon prénom et appel le Pierre</a>
+      <!--ng-model: c'est une directive qui permet d'interagir avec des variables en scope-->
+      <input type="text" ng-model="nom" name='name'>
+      <input type="text" ng-blur="nom == prenom" ng-model="prenom" name='name'>
+      <div ng-if='nom == prenom' >Le nom doit être différent du nom !</div>
+      <div ng-if='nom.length > 20' >Votre nom est trop long !</div>
+
+      <label for="">Salaire</label>
+      <input type="text" ng-model='salaire' name="name">
+      <label for="">Pourcentage salaire</label>
+      <input type="text" ng-model='impot' name="name" ng-blur="pourcentage()">
+
+
+     <div ng-class="classBase">
+         <label for="" class="control-label">Salaire</label>
+         <input ng-keyup="changeClass()" class="form-control" type="text" name="name" ng-model="salaire" value="" >
+         <label for="">Salaire en franc</label>
+
+         <input type="checkbox" name="name" ng-change="franc()" ng-model='salaireEnFranc'>
+      </div>
+      <div ng-if='salaire >= 1000000 && nom == trump'>Je suis président !</div>
+      <button ng-click='afficherRens()'class="btn btn-primary btn-lg active" type="button" name="button">Voir le détail</button>
+        <div class="jumbotron" ng-if='seeDetail' ng-class="{'alert-danger':salaire<=700,'alert-warning':salaire<1500,'alert-success':salaire<3000}" >
+          <h1>{{ nom }}</h1> <h2>{{ prenom }}</h2> <h3>{{salaire}}</h3>
+          <button ng-click='formattage()' type="button" class="btn btn-danger">Refresh</button>
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="js/main.js">
+
+</script>
+  </body>
+</html>

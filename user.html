@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Angular Merkel</title>
+
+   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+   <link rel="stylesheet" href="style.css" media="screen" title="no title">
+
+   <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   <![endif]-->
+ </head>
+ <body  ng-app='appUsers'>
+
+
+   <section ng-controller='UsersCtrl'>
+
+     <h3>Gestion des utilisateurs</h3>
+     <select class="form-group" name="">
+       <option></option>
+       <option>Le plus jeune</option>
+       <option>Le plus vieux</option>
+     </select>
+     <input ng-change='majorite()' type="checkbox" name="name" value="">Utilisateur majeur.
+     <hr/>
+
+   <ul>
+
+     <li ng-repeat="user in users | orderBy:'-age'">
+
+<!---Afficher le sexe par utilisateur: Homme ou Femme--->
+      <img class="img-thumbnail" style='width:140px;height:140px' ng-src="{{user.img}}"  alt="">
+       <p ng-if='user.sexe == true'>Homme</p>
+       <p ng-if='user.sexe == false'>Femme</p>
+       <p>{{user.nom}} {{user.prenom}}  </p>
+       <p> {{user.age}} ans </p>
+       <p> Habite à : {{user.ville}} </p>
+       <button class='btn btn-danger'type="button" name="button"ng-click='removeUser(user)'>Supprimer</button>
+       <hr/>
+     </li>
+
+   </ul>
+
+   <div class="col-md-8">
+   <h3> Ajouter un utilisateur</h3>
+   <form ng-submit='ajouterUser()'>
+
+     <div class="form-group">
+         <input id='Homme'type="radio" name="sexe" ng-model='sexe'><label for="Homme">Homme</label>
+         <input id='Femme'type="radio" name="sexe" ng-model='sexe'><label for="Femme">Femme</label>
+     </div>
+     <div class="form-group">
+       <input class='form-control' placeholder="Nom"type="text" name="nom" ng-model='nom'>
+     </div>
+     <div class="form-group">
+       <input class='form-control'type="text" placeholder="Prenom"name="prenom" ng-model='prenom'>
+     </div>
+     <div class="form-group">
+       <input class='form-control'type="text" placeholder="Age"name="age" ng-model='age'>
+     </div>
+     <div class="form-group">
+       <input class='form-control'type="text" placeholder='Ville' name="ville" ng-model='ville'>
+     </div>
+     <div class="form-group">
+       <input class='form-control'type="url" placeholder='Avatar' name="image" ng-model='img'>
+     </div>
+     <button class="btn btn-primary btn-lg active" type="submit" name="button">Enregistrer cet utilisateur</button>
+
+
+   </form>
+   </div>
+
+   </section>
+
+
+
+
+
+
+
+   <script src="bower_components/jquery/dist/jquery.js"></script>
+   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+   <script src="bower_components/angular/angular.min.js"></script>
+   <script src='js/user.js'></script>
+
+
+
+
+
+
+
+ </body>
+</html>
