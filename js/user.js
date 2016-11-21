@@ -2,10 +2,60 @@
  'use strict';
 
    angular.module('appUsers',[])
-           .controller('UsersCtrl', UsersCtrl);
+   .filter('lowerThan',function(){
+             var maxage = 18;
+             // input le tableau, max le checkbox
+             return function(input,max) {
+               // si checkbox = true
+               if(max == true){
+
+                 var tableauAffiche = [];
+                 console.log(tableauAffiche);
+                 input.forEach(function(user){
+                   if(user.age >= maxage){
+                     tableauAffiche.push(user);
+                   }
+                 });
+
+                 return tableauAffiche;
+
+               }else {
+
+                 return input;
+               }
+
+               }
+             })
+  .filter('filtreVille',function(){
+
+              // input le tableau, max le checkbox
+          return function(input,maxdeux) {
+
+              // si input = true
+          if(maxdeux == true){
+
+          var tableauAffiche = [];
+          console.log(tableauAffiche);
+          input.forEach(function(user){
+          if(user.ville === 'Paris' || 'Lyon' || 'Marseille'){
+          tableauAffiche.push(user);
+        }
+    });
+
+      return tableauAffiche;
+
+      }else {
+
+          return input;
+      }
+
+    }
+  })
+           .controller('UsersCtrl',UsersCtrl);
 
 
-           function UsersCtrl($scope){
+
+           function UsersCtrl($scope, $filter){
              console.log('scope chargée');
 
              $scope.users = [
@@ -13,7 +63,7 @@
                  {
                    nom: 'Michel',
                    prenom:'Cédric',
-                   age:'34',
+                   age: 34,
                    ville:'Saint-Priest',
                    sexe:true,
                    img:'http://www.quizz.biz/uploads/quizz/83417/4_6mWX9.jpg'
@@ -21,7 +71,7 @@
                  {
                    nom: 'Desmoort',
                    prenom:'Caroline',
-                   age:'37',
+                   age: 37,
                    ville:'Saint-Priest',
                    sexe:false,
                    img:''
@@ -44,16 +94,11 @@
                  }
 
 
-
              ];
-/*
-function message(text){
- alert(text)
-}
 
-message('laaaaa')
-message('okkk');
-*/
+
+          //  var orderBy = $filter('orderBy');
+            //$scope.selectage = orderBy($scope.users, 'age');
 
 
 
@@ -80,28 +125,37 @@ message('okkk');
 
             // Créer un bouton par utilisateur pour pouvoir supprimer
             // * un utilisateur
-             $scope.removeUser = function(user){
+             $scope.suppr = function(user){
                  console.log(user);
                 var position = $scope.users.indexOf(user);
                 console.log(position);
                  $scope.users.splice(position,1);
-
-                 /* + Ajouter un Avatar (url d'image) par utilisateur lors de l'affichage des utilisateurs
-                 et de la création d'utilisateur (ng-src). Valider par un blur que la photo soit gif
-                 */
+                }
 
 
-                 //+ Ajouter une checkbox pour voir apparaitre que les utilisateurs majeur quand elle est cochés
-                 $scope.majorite = function(users){
-
-                 }
+//+ Ajouter une checkbox pour voir apparaitre que les utilisateurs majeur quand elle est cochés
 
 
 
+          $scope.changement = function(){
+                         console.log($scope.age);
+                         if($scope.age == "age"){
+                           $scope.users = $filter('orderBy')($scope.users, 'age', false);
 
+                         }else{
+                           $scope.users = $filter('orderBy')($scope.users, 'age', true);
+                         }
+                       };
 
-               }
+          $scope.majorite = function(user){
 
+            if($scope.age == "age"){
+              $scope.users = $filter('lowerThan')($scope.users, 'age', false);
+
+            }else{
+              $scope.users = $filter('lowerThan')($scope.users, 'age', true);
+            }
+          };
 
 
 

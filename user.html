@@ -20,26 +20,32 @@
    <section ng-controller='UsersCtrl'>
 
      <h3>Gestion des utilisateurs</h3>
-     <select class="form-group" name="">
-       <option></option>
-       <option>Le plus jeune</option>
-       <option>Le plus vieux</option>
+     <select ng-change ="changement()" ng-model='age' class="form-group" name="">
+       <option ></option>
+       <option value='age'>Le plus jeune</option>
+
+       <option value='-age'>Le plus vieux</option>
      </select>
-     <input ng-change='majorite()' type="checkbox" name="name" value="">Utilisateur majeur.
+     <input ng-model='max' type="checkbox" name="name" >Utilisateur majeur.
+     <input ng-model='maxdeux' type="radio" name="x" value="" >Paris
+     <input ng-model='maxdeux' type="radio" name="x" value="" >Lyon
+     <input ng-model='maxdeux' type="radio" name="x" value="" >Marseille
+     <input ng-model='maxdeux' type="radio" name="x" value="" >Toutes les villes
+
      <hr/>
 
    <ul>
 
-     <li ng-repeat="user in users | orderBy:'-age'">
+     <li ng-repeat="user in users | lowerThan:max | filtreVille :maxdeux">
 
 <!---Afficher le sexe par utilisateur: Homme ou Femme--->
       <img class="img-thumbnail" style='width:140px;height:140px' ng-src="{{user.img}}"  alt="">
-       <p ng-if='user.sexe == true'>Homme</p>
-       <p ng-if='user.sexe == false'>Femme</p>
+       <p ng-if='user.sexe === true'>Homme</p>
+       <p ng-if='user.sexe === false'>Femme</p>
        <p>{{user.nom}} {{user.prenom}}  </p>
        <p> {{user.age}} ans </p>
        <p> Habite à : {{user.ville}} </p>
-       <button class='btn btn-danger'type="button" name="button"ng-click='removeUser(user)'>Supprimer</button>
+       <button class='btn btn-danger'type="button" name="button" ng-click='removeUser(user)'>Supprimer</button>
        <hr/>
      </li>
 
@@ -83,8 +89,9 @@
 
 
    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-   <script src="bower_components/angular/angular.min.js"></script>
+
    <script src='js/user.js'></script>
 
 
