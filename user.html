@@ -27,16 +27,16 @@
        <option value='-age'>Le plus vieux</option>
      </select>
      <input ng-model='max' type="checkbox" name="name" >Utilisateur majeur.
-     <input ng-model='maxdeux' type="radio" name="x" value="" >Paris
-     <input ng-model='maxdeux' type="radio" name="x" value="" >Lyon
-     <input ng-model='maxdeux' type="radio" name="x" value="" >Marseille
-     <input ng-model='maxdeux' type="radio" name="x" value="" >Toutes les villes
+     <input ng-model='searchCity' type="radio" name="x" value="" >Paris
+     <input ng-model='searchCity' type="radio" name="x" value="" >Lyon
+     <input ng-model='searchCity' type="radio" name="x" value="" >Marseille
+     <input ng-model='searchCity' type="radio" name="x" value="" >Toutes les villes
 
      <hr/>
 
    <ul>
 
-     <li ng-repeat="user in users | lowerThan:max | filtreVille :maxdeux">
+     <li ng-repeat="user in users | lowerThan:max | filtreVille :searchCity">
 
 <!---Afficher le sexe par utilisateur: Homme ou Femme--->
       <img class="img-thumbnail" style='width:140px;height:140px' ng-src="{{user.img}}"  alt="">

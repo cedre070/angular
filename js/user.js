@@ -26,18 +26,24 @@
 
                }
              })
-  .filter('filtreVille',function(){
+  /*.filter('filtreVille',function(){
 
               // input le tableau, max le checkbox
-          return function(input,maxdeux) {
+          return function(input,searchCity) {
 
               // si input = true
-          if(maxdeux == true){
+          if(searchCity == true){
 
           var tableauAffiche = [];
           console.log(tableauAffiche);
           input.forEach(function(user){
-          if(user.ville === 'Paris' || 'Lyon' || 'Marseille'){
+          if(user.ville === 'Paris'){
+          tableauAffiche.push(user);
+        }
+        else if(user.ville === 'Lyon'){
+          tableauAffiche.push(user);
+        }
+        else if(user.ville === 'Marseille'){
           tableauAffiche.push(user);
         }
     });
@@ -50,7 +56,7 @@
       }
 
     }
-  })
+  })*/
            .controller('UsersCtrl',UsersCtrl);
 
 
